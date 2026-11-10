@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tragedia greca – Ripasso</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Plus:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+:root{--bg:#e8edf0;--surf:#fff;--ink:#14263a;--mut:#5a6b7b;--line:#ccd5db;--acc:#1f5f73;--gold:#b98a2e;--ok:#2a7a4b;--no:#b03a3a;--hd:#14263a;--hdt:#f4ecd8;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1620;--surf:#182534;--ink:#e8edf0;--mut:#95a5b3;--line:#2c3d4d;--acc:#7cc0cf;--gold:#d8b25c;--ok:#6cc48f;--no:#e27c7c;--hd:#0a111a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1620;--surf:#182534;--ink:#e8edf0;--mut:#95a5b3;--line:#2c3d4d;--acc:#7cc0cf;--gold:#d8b25c;--ok:#6cc48f;--no:#e27c7c;--hd:#0a111a;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:17px/1.5 "Source Sans 3",system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom,0px)}
+header{background:var(--hd);color:var(--hdt);padding:calc(22px + env(safe-area-inset-top,0px)) 16px 0;border-bottom:0}
+.hw{max-width:720px;margin:0 auto}
+h1{font:700 clamp(1.7rem,6vw,2.3rem)/1.15 "Gentium Plus",Georgia,serif;margin:0 0 4px}
+header p{margin:0 0 16px;opacity:.75}
+.key{height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='14'%3E%3Cpath d='M0 12H24M3 12V2H21V9H9V5H15' fill='none' stroke='%23d8b25c' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:18px 16px 48px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:4px;margin-bottom:14px;gap:4px}
+button{font:inherit;color:inherit;cursor:pointer}
+.tab{border:0;background:none;padding:10px 6px;border-radius:7px;font-weight:600;color:var(--mut)}
+.tab[aria-pressed=true]{background:var(--hd);color:var(--hdt)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+.chip{flex:none;border:1px solid var(--line);background:var(--surf);padding:6px 14px;border-radius:999px;font-size:.95rem}
+.chip[aria-pressed=true]{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold);font-weight:600}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bar{display:flex;justify-content:space-between;color:var(--mut);font-size:.95rem;margin-bottom:6px}
+.prog{height:5px;background:var(--line);border-radius:3px;margin-bottom:14px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+.scene{perspective:1400px;margin-bottom:14px}
+.card{position:relative;width:100%;height:300px;transition:transform .55s;transform-style:preserve-3d;border:0;background:none;padding:0;display:block}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 6px 20px rgba(20,38,58,.12)}
+.face::before{content:"";position:absolute;inset:8px;border:1px solid var(--gold);border-radius:9px;opacity:.55;pointer-events:none}
+.back{transform:rotateY(180deg);overflow:auto;justify-content:flex-start}
+.term{font:400 clamp(2.2rem,10vw,3.4rem)/1.2 "Gentium Plus",Georgia,serif}
+.cat{color:var(--gold);margin-top:10px;font-weight:600}
+.hint{color:var(--mut);font-size:.88rem;margin-top:18px}
+.def{font-size:1.1rem;line-height:1.65;text-align:left;margin:auto 0}
+.def b{font:700 1.5rem "Gentium Plus",Georgia,serif;display:block;margin-bottom:8px;text-align:center}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.btn{flex:1;min-width:100px;border:1px solid var(--line);background:var(--surf);padding:12px;border-radius:10px;font-weight:600}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.no{border-color:var(--no);color:var(--no)}
+.btn.main{background:var(--hd);border-color:var(--hd);color:var(--hdt)}
+.btn:disabled{opacity:.4;cursor:default}
+.q{background:var(--surf);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:18px;margin-bottom:12px;font-size:1.1rem;line-height:1.65}
+.q small{display:block;color:var(--mut);margin-bottom:6px;font-size:.9rem}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:var(--surf);padding:12px 14px;border-radius:10px;margin-bottom:8px;font:400 1.35rem "Gentium Plus",Georgia,serif}
+.opt span{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:600 .85rem "Source Sans 3",sans-serif;color:var(--mut)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--surf))}
+.opt.wrong{border-color:var(--no);background:color-mix(in srgb,var(--no) 16%,var(--surf))}
+.fb{margin:4px 0 12px;font-weight:600;min-height:1.5em}
+.res{text-align:center;padding:28px 16px;background:var(--surf);border:1px solid var(--line);border-radius:14px}
+.res .big{font:700 3rem "Gentium Plus",Georgia,serif;color:var(--gold)}
+.hide{display:none}
+.list{display:grid;gap:10px}
+.li{background:var(--surf);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:14px 16px}
+.li b{font:700 1.3rem "Gentium Plus",Georgia,serif;display:block}
+@media (prefers-reduced-motion:reduce){.card,.prog i{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="hw"><h1>Tragedia greca</h1><p>Ripasso di concetti, teatro e forme dello spettacolo</p></div><div class="key"></div></header>
+<main>
+<div class="tabs" role="group" aria-label="Attività">
+<button class="tab" data-m="qz" aria-pressed="true">Quiz</button>
+<button class="tab" data-m="fc" aria-pressed="false">Flashcards</button>
+<button class="tab" data-m="ls" aria-pressed="false">Elenco</button>
+</div>
+<div class="filters" id="filters" role="group" aria-label="Argomento"></div>
+
+<section id="qz">
+<div class="bar"><span id="qpos"></span><span id="qscore"></span></div>
+<div class="prog"><i id="qbar"></i></div>
+<div class="q" id="qtext"></div>
+<div id="opts"></div>
+<div class="fb" id="qfb" aria-live="polite"></div>
+<div class="row"><button class="btn main" id="qnext">Avanti</button><button class="btn" id="qrestart">Ricomincia</button></div>
+</section>
+
+<section id="fc" class="hide">
+<div class="bar"><span id="pos"></span><span id="known"></span></div>
+<div class="prog"><i id="fbar"></i></div>
+<div class="scene"><button class="card" id="card" aria-label="Gira la carta"><div class="face"><div class="term" id="ft"></div><div class="cat" id="fcat"></div><div class="hint">Tocca per girare</div></div><div class="face back"><div class="def" id="fb"></div></div></button></div>
+<div class="row"><button class="btn no" id="again">Da ripassare</button><button class="btn ok" id="got">Lo so</button></div>
+<div class="row"><button class="btn" id="prev">Indietro</button><button class="btn" id="next">Avanti</button></div>
+<div class="row"><button class="btn" id="shuf">Mescola</button><button class="btn" id="onlyNo">Solo da ripassare</button></div>
+</section>
+
+<section id="ls" class="hide"><div class="list" id="list"></div></section>
+</main>
+<script>
+const D=[
+["Concetti","γένος","indica la stirpe o la famiglia a cui appartiene l'individuo. Al suo interno le colpe si trasmettono di generazione in generazione, secondo la legge del sangue e la logica della vendetta privata, che alimenta un ciclo infinito di violenza."],
+["Concetti","ὕβρις","letteralmente «tracotanza», indica l'arroganza dell'uomo che supera i limiti e la misura imposti dagli dèi."],
+["Concetti","μέγας ὄλβος","indica una condizione di eccessiva prosperità e felicità, che può generare nell'uomo superbia e senso di onnipotenza, conducendolo alla ὕβρις."],
+["Concetti","δίκη","rappresenta la giustizia divina e umana, di cui è garante Zeus. La punizione divina ha lo scopo di ristabilire l'ordine violato e correggere le colpe degli uomini."],
+["Concetti","φθόνος τῶν θεῶν","letteralmente «invidia degli dèi», è la concezione arcaica secondo cui gli dèi puniscono gli uomini per la loro eccessiva felicità. Eschilo supera questa visione, attribuendo alla punizione divina una funzione morale ed educativa."],
+["Concetti","πάθει μάθος","espressione che significa «conoscere attraverso il dolore» e indica come la sofferenza sia uno strumento attraverso cui gli dèi insegnano la saggezza agli uomini."],
+["Concetti","βίαιος χάρις","letteralmente «grazia violenta», indica il valore educativo della sofferenza, attraverso cui gli dèi guidano i mortali verso la saggezza, anche contro la loro volontà."],
+["Concetti","ἀρά","la maledizione che colpisce un individuo e che si trasmette per via genetica sui suoi discendenti."],
+["Concetti","τίσις","la punizione divina per un atto di hybris."],
+["Concetti","ἄτη","l'accecamento mentale che colpisce l'uomo che si sia macchiato di hybris e che consiste nell'incapacità di prendere decisioni assennate e discernere tra giusto e sbagliato."],
+["Teatro e scena","θέατρον","corrisponde al latino cavea e indica la cavità semicircolare a gradoni destinata al pubblico."],
+["Teatro e scena","θυμέλη","altare di Dioniso posto al centro dell'orchestra."],
+["Teatro e scena","σκηνή","la scena che funge da fondale e successivamente da palcoscenico sopraelevato per gli attori."],
+["Teatro e scena","ἐγκύκλημα","carrello su ruote che mostrava gli ambienti interni."],
+["Teatro e scena","μηχανή","una gru con cui venivano calati i personaggi che comparivano dall'alto."],
+["Teatro e scena","κεραυνοσκοπεῖον e βροντεῖον","congegni utilizzati per riprodurre la luce dei fulmini e il rumore dei tuoni."],
+["Teatro e scena","πρόσωπον","la maschera indossata dall'attore e dotata di diverse connotazioni magico-rituali oltre che di funzioni pratiche."],
+["Teatro e scena","θεωρικόν","il fondo per gli spettacoli destinato a pagare il biglietto d'ingresso ai cittadini meno abbienti."],
+["Forme dello spettacolo","ῥῆσις","monologo, narrazione monologica tipica dei messaggeri."],
+["Forme dello spettacolo","ἀγών","dialogo in cui si fronteggiavano i diversi punti di vista dei due personaggi."],
+["Forme dello spettacolo","στιχομυθία","scambio concitato di battute tra due personaggi che pronunciavano rispettivamente un verso alla volta."],
+["Forme dello spettacolo","μονῳδία","un brano lirico cantato da un solo attore."],
+["Forme dello spettacolo","ἀμοιβαῖος","un duetto lirico fra un attore e il coro."],
+["Forme dello spettacolo","κομμός","un duetto lirico con funzione di lamento funebre, canto di disperazione."]
+];
+const $=s=>document.querySelector(s);
+const cats=["Tutti",...new Set(D.map(d=>d[0]))];
+let cat="Tutti",mode="qz",deck=[],i=0,known=new Set(),onlyNo=false;
+const pool=()=>D.filter(d=>cat==="Tutti"||d[0]===cat);
+function shuffle(a){a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+
+/* Quiz */
+let qs=[],qi=0,score=0,done=false;
+function qStart(){qs=shuffle(pool());qi=0;score=0;qShow()}
+function qShow(){
+  const box=$("#opts");box.innerHTML="";$("#qfb").textContent="";done=false;
+  $("#qbar").style.width=(qs.length?qi/qs.length*100:0)+"%";
+  if(qi>=qs.length){const r=document.createElement("div");r.className="res";r.innerHTML='<div class="big"></div><p></p>';r.querySelector(".big").textContent=score+" / "+qs.length;r.querySelector("p").textContent=score===qs.length?"Ottimo, nessun errore.":"Rifai il quiz per consolidare.";$("#qtext").replaceChildren(r);$("#qtext").style.cssText="padding:0;border:0;background:none";$("#qpos").textContent="Finito";$("#qscore").textContent="";$("#qnext").classList.add("hide");return}
+  $("#qtext").style.cssText="";$("#qnext").classList.remove("hide");$("#qnext").disabled=true;$("#qnext").textContent=qi===qs.length-1?"Risultato":"Avanti";
+  const q=qs[qi];$("#qpos").textContent="Domanda "+(qi+1)+" di "+qs.length;$("#qscore").textContent="Punti: "+score;
+  const sm=document.createElement("small");sm.textContent="A quale termine corrisponde?";$("#qtext").replaceChildren(sm,q[2]);
+  const others=shuffle(D.filter(d=>d[1]!==q[1])).slice(0,3);
+  shuffle([q,...others]).forEach((o,n)=>{const b=document.createElement("button");b.className="opt";const l=document.createElement("span");l.textContent="ABCD"[n];b.append(l,o[1]);b.onclick=()=>pick(b,o[1]===q[1],q);$("#opts").appendChild(b)});
+}
+function pick(b,ok,q){
+  if(done)return;done=true;
+  if(ok){score++;b.classList.add("right");$("#qfb").textContent="Esatto."}
+  else{b.classList.add("wrong");[...$("#opts").children].forEach(x=>{if(x.textContent.slice(1)===q[1])x.classList.add("right")});$("#qfb").textContent="Non è questo: la risposta è "+q[1]+"."}
+  $("#qscore").textContent="Punti: "+score;$("#qnext").disabled=false;$("#qnext").focus();
+}
+$("#qnext").onclick=()=>{qi++;qShow()};$("#qrestart").onclick=qStart;
+
+/* Flashcards */
+function build(){deck=pool().filter(d=>!onlyNo||!known.has(d[1]));i=0;showCard()}
+function showCard(){
+  $("#card").classList.remove("flip");
+  if(!deck.length){$("#ft").textContent="Nessuna carta";$("#fcat").textContent=onlyNo?"Le hai segnate tutte come note.":"";$("#fb").textContent="";$("#pos").textContent="";$("#fbar").style.width="0"}
+  else{const d=deck[i],b=document.createElement("b");b.textContent=d[1];$("#ft").textContent=d[1];$("#fcat").textContent=d[0];$("#fb").replaceChildren(b,d[2]);$("#pos").textContent="Carta "+(i+1)+" di "+deck.length;$("#fbar").style.width=((i+1)/deck.length*100)+"%"}
+  $("#known").textContent="Sai: "+pool().filter(d=>known.has(d[1])).length+" / "+pool().length;
+}
+function go(k){if(deck.length){i=(i+k+deck.length)%deck.length;showCard()}}
+$("#card").onclick=()=>$("#card").classList.toggle("flip");
+$("#next").onclick=()=>go(1);$("#prev").onclick=()=>go(-1);
+$("#shuf").onclick=()=>{deck=shuffle(deck);i=0;showCard()};
+$("#got").onclick=()=>{if(deck.length){known.add(deck[i][1]);go(1)}};
+$("#again").onclick=()=>{if(deck.length){known.delete(deck[i][1]);go(1)}};
+$("#onlyNo").onclick=e=>{onlyNo=!onlyNo;e.target.textContent=onlyNo?"Tutte le carte":"Solo da ripassare";build()};
+document.addEventListener("keydown",e=>{if(mode!=="fc")return;if(e.key==="ArrowRight")go(1);if(e.key==="ArrowLeft")go(-1)});
+
+/* Elenco */
+function renderList(){$("#list").replaceChildren(...pool().map(d=>{const e=document.createElement("div");e.className="li";const b=document.createElement("b");b.textContent=d[1];e.append(b,d[2]);return e}))}
+
+function setMode(m){mode=m;["qz","fc","ls"].forEach(x=>$("#"+x).classList.toggle("hide",x!==m));document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-pressed",t.dataset.m===m));if(m==="fc")build();if(m==="ls")renderList()}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setMode(t.dataset.m));
+cats.forEach(c=>{const b=document.createElement("button");b.className="chip";b.textContent=c;b.setAttribute("aria-pressed",c===cat);b.onclick=()=>{cat=c;document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x.textContent===c));qStart();build();if(mode==="ls")renderList()};$("#filters").appendChild(b)});
+qStart();build();
+</script>
+</body>
+</html>
